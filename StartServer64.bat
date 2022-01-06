@@ -45,7 +45,7 @@ SCHTASKS /Create /SC ONCE /ST %NEWTIME% /SD %NEWDATE% /TN "PZ\quit" /F /TR C:\St
 ::Delete workshop cache and start server
 ::============================================
 
-::del /f "C:\SteamCMD\steamapps\common\Project Zomboid Dedicated Server\steamapps\workshop\appworkshop_108600.acf"
+del /f "C:\SteamCMD\steamapps\common\Project Zomboid Dedicated Server\steamapps\workshop\appworkshop_108600.acf"
 
 @setlocal enableextensions
 @cd /d "%~dp0"
