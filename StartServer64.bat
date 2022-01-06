@@ -14,7 +14,7 @@ for /f "tokens=1*" %%A in ('
 )
 
 SCHTASKS /Create /SC ONCE /ST %NEWTIME% /SD %NEWDATE% /TN "PZ\10m" /F /TR C:\SteamCMD\rcon\10m.bat
-pause
+
 ::============================================
 ::1 Minute Warning
 ::============================================
