@@ -1,11 +1,15 @@
 :start
 
 @echo off
+::============================================
+:: 2H
+::============================================
+SET intervalInMinuteToRestart=120
 
 ::============================================
 ::10 Minute Warning
 ::============================================
-SET mintoadd=110
+SET /A mintoadd=%intervalInMinuteToRestart%-10
 for /f "tokens=1*" %%A in ('
   powershell -NoP -C "(Get-Date).AddMinutes(%mintoadd%).ToString('MM/dd/yyyy HH:mm:ss')"
 ') do (
@@ -18,7 +22,7 @@ SCHTASKS /Create /SC ONCE /ST %NEWTIME% /SD %NEWDATE% /TN "PZ\10m" /F /TR C:\Ste
 ::============================================
 ::1 Minute Warning
 ::============================================
-SET mintoadd=119
+SET /A mintoadd=%intervalInMinuteToRestart%-1
 for /f "tokens=1*" %%A in ('
   powershell -NoP -C "(Get-Date).AddMinutes(%mintoadd%).ToString('MM/dd/yyyy HH:mm:ss')"
 ') do (
@@ -30,7 +34,7 @@ SCHTASKS /Create /SC ONCE /ST %NEWTIME% /SD %NEWDATE% /TN "PZ\1m" /F /TR C:\Stea
 ::============================================
 ::Restart
 ::============================================
-SET mintoadd=120
+SET mintoadd=%intervalInMinuteToRestart%
 for /f "tokens=1*" %%A in ('
   powershell -NoP -C "(Get-Date).AddMinutes(%mintoadd%).ToString('MM/dd/yyyy HH:mm:ss')"
 ') do (
