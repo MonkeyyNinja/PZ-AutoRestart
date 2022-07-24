@@ -7,6 +7,12 @@
 SET intervalInMinuteToRestart=120
 
 ::============================================
+:: doDeleteAllMod
+:: 1==true, 0==false
+::============================================
+SET /A doDeleteAllMod = 1
+
+::============================================
 ::10 Minute Warning
 ::============================================
 SET /A mintoadd=%intervalInMinuteToRestart%-10
@@ -45,16 +51,19 @@ SCHTASKS /Create /SC ONCE /ST %NEWTIME% /SD %NEWDATE% /TN "PZ\quit" /F /TR C:\St
 
 @echo on
 
+if %doDeleteAllMod%==1 goto :deletecache else goto :startserver
+
 ::============================================
 ::Delete workshop cache and start server
 ::============================================
-
+:deletecache
 del /f "C:\SteamCMD\steamapps\common\Project Zomboid Dedicated Server\steamapps\workshop\appworkshop_108600.acf"
 
 
 ::============================================
 ::NOTE: I think you should replace the section below with the current text in the original file
 ::============================================
+:startserver
 @setlocal enableextensions
 @cd /d "%~dp0"
 SET PZ_CLASSPATH=java/istack-commons-runtime.jar;java/jassimp.jar;java/javacord-2.0.17-shaded.jar;java/javax.activation-api.jar;java/jaxb-api.jar;java/jaxb-runtime.jar;java/lwjgl.jar;java/lwjgl-natives-windows.jar;java/lwjgl-glfw.jar;java/lwjgl-glfw-natives-windows.jar;java/lwjgl-jemalloc.jar;java/lwjgl-jemalloc-natives-windows.jar;java/lwjgl-opengl.jar;java/lwjgl-opengl-natives-windows.jar;java/lwjgl_util.jar;java/sqlite-jdbc-3.27.2.1.jar;java/trove-3.0.3.jar;java/uncommons-maths-1.2.3.jar;java/
