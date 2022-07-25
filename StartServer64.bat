@@ -12,12 +12,13 @@ SET intervalInMinuteToRestart=120
 ::============================================
 SET /A doDeleteAllMod = 1
 
+SET dateFormat='yyyy/MM/dd HH:mm:ss'
 ::============================================
 ::10 Minute Warning
 ::============================================
 SET /A mintoadd=%intervalInMinuteToRestart%-10
 for /f "tokens=1*" %%A in ('
-  powershell -NoP -C "(Get-Date).AddMinutes(%mintoadd%).ToString('MM/dd/yyyy HH:mm:ss')"
+  powershell -NoP -C "(Get-Date).AddMinutes(%mintoadd%).ToString(%dateFormat%)"
 ') do (
   Set "NEWDATE=%%A"
   set "NEWTIME=%%B"
@@ -30,7 +31,7 @@ SCHTASKS /Create /SC ONCE /ST %NEWTIME% /SD %NEWDATE% /TN "PZ\10m" /F /TR C:\Ste
 ::============================================
 SET /A mintoadd=%intervalInMinuteToRestart%-1
 for /f "tokens=1*" %%A in ('
-  powershell -NoP -C "(Get-Date).AddMinutes(%mintoadd%).ToString('MM/dd/yyyy HH:mm:ss')"
+  powershell -NoP -C "(Get-Date).AddMinutes(%mintoadd%).ToString(%dateFormat%)"
 ') do (
   Set "NEWDATE=%%A"
   set "NEWTIME=%%B"
@@ -42,7 +43,7 @@ SCHTASKS /Create /SC ONCE /ST %NEWTIME% /SD %NEWDATE% /TN "PZ\1m" /F /TR C:\Stea
 ::============================================
 SET mintoadd=%intervalInMinuteToRestart%
 for /f "tokens=1*" %%A in ('
-  powershell -NoP -C "(Get-Date).AddMinutes(%mintoadd%).ToString('MM/dd/yyyy HH:mm:ss')"
+  powershell -NoP -C "(Get-Date).AddMinutes(%mintoadd%).ToString(%dateFormat%)"
 ') do (
   Set "NEWDATE=%%A"
   set "NEWTIME=%%B"
