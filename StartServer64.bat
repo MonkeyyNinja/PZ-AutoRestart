@@ -51,7 +51,11 @@ SCHTASKS /Create /SC ONCE /ST %NEWTIME% /SD %NEWDATE% /TN "PZ\quit" /F /TR C:\St
 
 @echo on
 
-if %doDeleteAllMod%==1 goto :deletecache else goto :startserver
+if %doDeleteAllMod%==1 (
+goto :deletecache 
+) else (
+ goto :startserver
+)
 
 ::============================================
 ::Delete workshop cache and start server
