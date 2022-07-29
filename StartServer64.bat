@@ -24,7 +24,7 @@ for /f "tokens=1*" %%A in ('
   set "NEWTIME=%%B"
 )
 
-SCHTASKS /Create /SC ONCE /ST %NEWTIME% /SD %NEWDATE% /TN "PZ\10m" /F /TR C:\SteamCMD\rcon\10m.bat
+SCHTASKS /Create /SC ONCE /ST %NEWTIME% /SD %NEWDATE% /TN "PZ\10m" /F /TR "start /min C:\SteamCMD\rcon\10m.bat"
 
 ::============================================
 ::1 Minute Warning
@@ -37,7 +37,7 @@ for /f "tokens=1*" %%A in ('
   set "NEWTIME=%%B"
 )
 
-SCHTASKS /Create /SC ONCE /ST %NEWTIME% /SD %NEWDATE% /TN "PZ\1m" /F /TR C:\SteamCMD\rcon\1m.bat
+SCHTASKS /Create /SC ONCE /ST %NEWTIME% /SD %NEWDATE% /TN "PZ\1m" /F /TR "start /min C:\SteamCMD\rcon\1m.bat"
 ::============================================
 ::Restart
 ::============================================
@@ -48,7 +48,7 @@ for /f "tokens=1*" %%A in ('
   Set "NEWDATE=%%A"
   set "NEWTIME=%%B"
 )
-SCHTASKS /Create /SC ONCE /ST %NEWTIME% /SD %NEWDATE% /TN "PZ\quit" /F /TR C:\SteamCMD\rcon\quit.bat
+SCHTASKS /Create /SC ONCE /ST %NEWTIME% /SD %NEWDATE% /TN "PZ\quit" /F /TR "start /min C:\SteamCMD\rcon\quit.bat"
 
 @echo on
 
